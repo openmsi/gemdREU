@@ -11,8 +11,7 @@ class Identity:
         self.page = page
         return
 
-        # Plotting shenanigans
-
+    # Plotting shenanigans
     # Assumes the subplot is a 1x1 square
     def AnnotateName(self, ax):
         """ Define positions of each element relative to the name of experimenter. Annotate name of experimenter """
@@ -39,17 +38,4 @@ class Identity:
         return
 
 if __name__ == "__main__":
-    # Test
-    sam = Identity("Sam", "sdawley1")
-    sam.NotebookNumber("SD-1-55")
-    sam.NotebookNumber("SD-1-56")
-    if sam.page:
-        print(f"Page 1: {sam.page}")
-
-    sam.NotebookNumber("")
-    if sam.page:
-        print(f"Page 2: {sam.page}")
-
-    pos = (0, 1)
-    pos = tuple([i - 1 for i in pos])
-    print(pos[0])
+    ...
