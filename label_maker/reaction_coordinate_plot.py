@@ -242,6 +242,6 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     dwell.PlotVectors(ax, a)
-    plt.savefig("weinger.pdf")
+    plt.savefig("dog.pdf")
 
 
