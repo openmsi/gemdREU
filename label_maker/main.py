@@ -3,6 +3,7 @@ from experimenter_identity import Identity
 from chemical_identity import Chemicals
 from space_and_time import SpaceTime
 from reaction_coordinate_plot import ReactionDiagram
+import annotate_label
 
 def HideSomeSpines(ax):
     """ This is just a function to hide the top and right spines on a plt diagram because I do it so often """
@@ -44,38 +45,49 @@ def main(times,  temps, rates=[]):
 
     #### Reaction Diagram ####
     dwell = ReactionDiagram(times=times, temps=temps, rates=rates)
-    # Portions of the reaction diagram
     dwell.PlotVectors(ax[1])
-    dwell.FunctionalTimeTickMarks(ax[1])
-    dwell.FunctionalTempTickMarks(ax[1])
-    dwell.AnnotateTemperatures(ax[1])
-    dwell.AnnotateTimes(ax[1])
-    dwell.AnnotateRates(ax[1])
+    annotate_label.AnnotateReactionCoordinate(
+        dwell, ax[1],
+        times=True,
+        temps=True,
+        rates=True,
+        time_ticks=True,
+        temp_ticks=True
+    )
 
     #### Experimenter Identity ####
     sam = Identity("Name", "JHED")
     sam.NotebookNumber("Page Number")
-    sam.AnnotateName(ax[0])
-    sam.AnnotateJHED(ax[0])
-    sam.AnnotateEmail(ax[0])
-    sam.AnnotateNotebookNumber(ax[0])
+    annotate_label.AnnotateIdentity(
+        sam, ax[0],
+        name=True,
+        jhed=True,
+        email=True,
+        notebook_number=True
+    )
 
     #### Date, Location, Time, etc. ####
     spacetime = SpaceTime(20221218, 245, 20221219, 1355)
-    spacetime.AnnotateStart(ax[0])
-    spacetime.AnnotateEnd(ax[0])
+    annotate_label.AnnotateSpaceTime(
+        spacetime, ax[0],
+        start=True,
+        end=True
+    )
 
     #### Chemicals and Such ####
     chemical = Chemicals("Superconductor", "I2")
-    chemical.AnnotateCompound(ax[0])
-    chemical.AnnotateTransportAgent(ax[0])
+    annotate_label.AnnotateChemistry(
+        chemical, ax[0],
+        compound=False, # LOOK TO chemical_identity.AnnotateTransportAgent() FOR ISSUE
+        ta=True
+    )
 
     # Funsies
     plt.suptitle("I am a God")
     return
 
 if __name__ == "__main__":
-    rate_test = False # change this bool for rates vs. no rates
+    rate_test = True # change this bool for rates vs. no rates
     temp_array = [25, 650, 1200, 1000, 250, 25]
 
     # Rates exist
@@ -83,9 +95,9 @@ if __name__ == "__main__":
         time_array = [48, 12, 12, 36]
         rate_array = [104.167, 22.917, 16.667, 31.25, 37.5] # C/hr # IF YOU"RE MAKING THIS DATA UP, MAKE SURE MATH IS CORRECT
         main(times=time_array, temps=temp_array, rates=rate_array)
-        plt.savefig("Rates.pdf")
+        plt.savefig("images/Rates.pdf")
     # Rates don't exist
     else:
         time_array = [6, 48, 24, 12, 12, 12, 24, 36, 6] # hr
         main(times=time_array, temps=temp_array, rates=[])
-        plt.savefig("No_rates.pdf")
+        plt.savefig("images/No_rates.pdf")

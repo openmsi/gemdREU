@@ -225,7 +225,7 @@ class ReactionDiagram:
                 )
         return
 
-    # ALL OF THESE FUNCTIONS NEED TO BE WORKED ON
+    # FIX THIS
     def AnnotateRates(self, ax):
         """
         Annotate rates (of temperature change) on reaction diagram

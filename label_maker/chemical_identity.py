@@ -13,7 +13,7 @@ class Chemicals:
 
     def AnnotateTransportAgent(self, ax):
         """Annotate name of experimenter"""
-        pos = self.AnnotateCompound(ax)
+        pos = self.AnnotateCompound(ax) # THIS IS AN ISSUE
         if self.ta:
             ax.annotate(f"Transport Agent: {self.ta}", (1, pos[1] - 0.25), ha="right", c="k")
         return
